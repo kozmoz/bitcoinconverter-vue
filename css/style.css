@@ -1,0 +1,13 @@
+/* Custom styling in addition to Bootstrap. */
+body {
+    padding: 1em;
+}
+
+.converter-block-title {
+    background: linear-gradient(to bottom, #184791 0%, #00256f 100%);
+}
+
+.converter-block-result {
+    border: 3px solid #00256f;
+    border-radius: 10px;
+}
