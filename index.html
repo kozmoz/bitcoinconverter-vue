@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -15,65 +14,71 @@
     <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
 
+    <!-- Vue.js Debugging. -->
+    <!--<script src="http://localhost:8098"></script>-->
+
     <script src="node_modules/vue/dist/vue.js"></script>
     <script src="node_modules/vee-validate/dist/vee-validate.js"></script>
+    <script src="node_modules/axios/dist/axios.js"></script>
+
 </head>
 
 <body>
 
-<div class="container-fluid">
+<div class="container">
 
     <div class="row">
-        <div class="col-lg-12 col-xl-10 converter-block-title text-center text-white">
-            <h2>Vue.js <!-- Bitcoin Converter --></h2>
+        <div class="col converter-block-title text-center text-white">
+            <h2>Bitcoin Converter</h2>
         </div>
     </div>
 
-    <div class="row py-3 bg-light" id="app">
-        <div class="col-sm-12 col-md-6 col-xl-5">
+    <div id="app" class="row py-3 bg-light" v-cloak="true">
+        <div class="col-sm-12 col-md-6">
             <form novalidate="novalidate">
 
-                <btc-select-currency :currency.sync="currency"></btc-select-currency>
+                <btc-select-currency
+                        :currencies="CURRENCIES"
+                        :currency.sync="currency">
+                </btc-select-currency>
 
-                <btc-select-conversiondir :currency="currency" :direction.sync="direction"></btc-select-conversiondir>
+                <btc-select-conversiondir
+                        :directions="DIRECTIONS"
+                        :currency="currency"
+                        :direction.sync="direction">
+                </btc-select-conversiondir>
 
-                <btc-input-amount :currency="currency" :direction="direction" :amount.sync="amount"></btc-input-amount>
-
+                <btc-input-amount
+                        :amount.sync="amount"
+                        :currency="currency"
+                        :direction="direction">
+                </btc-input-amount>
             </form>
         </div>
 
-        <div class="col-sm-12 col-md-6 col-xl-5 m-auto">
+        <div class="col-sm-12 col-md-6 m-auto bg-light">
+            <div class="converter-block-result bg-white text-center px-3 py-3">
 
-            <div class="converter-block-result bg-white text-center px-3 pt-3">
-                <div v-if="!updateerror">
-                    <h3>
-                        <template v-if="direction === 'TOBTC' && currency === 'EUR'">&#x20ac;</template>
-                        <template v-if="direction === 'TOBTC' && currency === 'USD'">$</template>
-                        {{amount || 0}}
-                        <template v-if="direction === 'FROMBTC'">BTC</template>
-                        =
-                        <template v-if="direction === 'FROMBTC' && currency === 'EUR'">&#x20ac;</template>
-                        <template v-if="direction === 'FROMBTC' && currency === 'USD'">$</template>
-                        {{calculatedResult || 0}}
-                        <template v-if="direction === 'TOBTC'">BTC</template>
-                    </h3>
-                    <p class="text-muted">The exchange rate is updated every minute</p>
-                    <p class="text-muted" v-if="exchangerateupdate">
-                        Last update at {{exchangerateupdate}},
-                        <template v-if="currency == 'EUR' && exchangerateeur">1 BTC = &#x20ac; {{exchangerateeur}} (buy)</template>
-                        <template v-if="currency == 'USD' && exchangerateusd">1 BTC = $ {{exchangerateusd}} (buy)</template>
-                    </p>
-                    <p class="text-danger" v-if="errors.items.length">Verify that everything is filled out correctly</p>
-                </div>
-                <div v-else class="alert alert-danger" role="alert">{{updateerror}}</div>
+                <btc-conversion-result
+                        :amount="amount"
+                        :currency="currency"
+                        :direction="direction">
+                </btc-conversion-result>
+
+                <p class="mb-0 text-danger" v-if="errors.items.length">
+                    Verify that everything is filled out correctly</p>
             </div>
+        </div>
+    </div>
 
-
+    <div class="row">
+        <div class="col">
+            <p>Example Vue.js web application, following blog post: <a href="todo" target="_blank">juur.link/2019/01/todo</a>
+            </p>
         </div>
     </div>
 
 </div>
-<!-- /container -->
 
 <script src="js/main.js"></script>
 

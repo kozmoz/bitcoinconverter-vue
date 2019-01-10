@@ -12,6 +12,7 @@
   "author": "Rob Juurlink <npm@juurlink.org> (https://juur.link)",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap": "^4.2.1",
     "vee-validate": "^2.1.5",
     "vue": "^2.5.21"

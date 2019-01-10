@@ -3,6 +3,14 @@ body {
     padding: 1em;
 }
 
+body > * {
+    max-width: 1024px;
+}
+
+[v-cloak] {
+    display: none
+}
+
 .converter-block-title {
     background: linear-gradient(to bottom, #184791 0%, #00256f 100%);
 }
