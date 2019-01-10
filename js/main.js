@@ -19,18 +19,20 @@ Vue.component('btc-select-currency', {
         currencies: Array
     },
     template: `
-      <div class="form-group">
-        <label for="currencyField">Currency</label>
-
+      <div class="form-group row">
+        <label for="currencyField" class="col-sm-3 col-form-label">Currency</label>
+        <div class="col-sm-9">
           <select 
           id="currencyField" 
-          class="form-control w-50"
+          name="currencyField" 
+          class="form-control"
           :value="currency"
           @change="$emit('update:currency', $event.target.value)">
             <option v-for="c in currencies" :value="c.key">
                 {{c.label}} {{c.sign}}
             </option>
           </select>
+        </div>  
       </div>
 `
 });
@@ -45,21 +47,72 @@ Vue.component('btc-select-conversiondir', {
         directions: Array
     },
     template: `
-      <div class="form-group">
-        <label>Direction</label>
-        <div class="form-check" v-for="d in directions">
-          <input 
-              type="radio"
-              :id="'direction' + d.key" 
-              name="direction"
-              class="form-check-input"
-              :value="d.key"
-              :checked="direction === d.key" 
-              @change="$emit('update:direction', $event.target.value)" />
-          <label class="form-check-label" :for="'direction' + d.key">
-            {{d.label.replace('$currency',currency)}}
-          </label>
+      <div class="form-group row">
+        <legend class="col-form-label col-sm-3 pt-0">Direction</legend>
+        <div class="col-sm-9">
+          <div class="form-check" v-for="d in directions">
+            <input 
+                type="radio"
+                :id="'direction' + d.key" 
+                name="direction"
+                class="form-check-input"
+                :value="d.key"
+                :checked="direction === d.key" 
+                @change="$emit('update:direction', $event.target.value)" />
+            <label class="form-check-label" :for="'direction' + d.key">
+              {{d.label.replace('$currency',currency)}}
+            </label>
+          </div>
         </div>
+      </div>
+`
+});
+
+/**
+ * Component to enter the amount for the exchange.
+ */
+Vue.component('btc-input-amount', {
+    props: {
+        amount: Number || undefined,
+        currency: String,
+        direction: String
+    },
+    methods: {
+        // Convert amount to number/undefined and emit an update event.
+        update: function (value) {
+            if (value === '') {
+                this.$emit('update:amount', undefined);
+            } else if (/^[0-9]+$/.test(value)) {
+                this.$emit('update:amount', parseInt(value, 10));
+            }
+        }
+    },
+    template: `
+      <div class="form-group row">
+          <label for="amount" class="col-sm-3 col-form-label">Amount</label>
+          <div class="col-sm-9">
+            <div class="input-group w-75">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <template v-if="direction === 'FROMBTC'">&#x0e3f;</template>
+                        <template v-else-if="currency === 'EUR'">€</template>
+                        <template v-else="">$</template>
+                    </span>
+                </div>
+                <input
+                id="amount" 
+                name="amount"
+                type="text" 
+                maxlength="10" 
+                v-validate="'numeric'" 
+                :value="amount" 
+                @input="update($event.target.value)" 
+                class="form-control" 
+                :class="{'is-invalid': errors.has('amount')}"/>
+                <div class="invalid-feedback" v-if="errors.has('amount')">Only numbers are allowed</div>
+            </div>
+            <small id="passwordHelpBlock" class="form-text text-muted">The amount is an integer</small>
+          </div>
       </div>
 `
 });
@@ -97,11 +150,11 @@ Vue.component('btc-conversion-result', {
                     vm.loading = false;
                     vm.loadError = JSON.stringify(response);
                 });
+            // Refresh the data every minute.
             setTimeout(updateExchangeRatePeriodically, 60000 /* One minute. */);
         };
-        // Todo: remove delay
         this.loading = true;
-        setTimeout(updateExchangeRatePeriodically, 5000);
+        updateExchangeRatePeriodically();
     },
     computed: {
         calculatedResult() {
@@ -141,7 +194,7 @@ Vue.component('btc-conversion-result', {
                 =
                 <template v-if="direction === 'FROMBTC' && currency === 'EUR'">€</template>
                 <template v-if="direction === 'FROMBTC' && currency === 'USD'">$</template>
-                {{calculatedResult | numberRound(2)}}
+                {{calculatedResult | numberRound(direction === 'TOBTC' ? 5 : 2)}}
                 <template v-if="direction === 'TOBTC'">BTC</template>
             </h3>
             <p class="mb-0">
@@ -161,52 +214,6 @@ Vue.component('btc-conversion-result', {
 `
 });
 
-/**
- * Component to enter the amount for the exchange.
- */
-Vue.component('btc-input-amount', {
-    props: {
-        amount: Number || undefined,
-        currency: String,
-        direction: String
-    },
-    methods: {
-        // Convert amount to number/undefined and emit an update event.
-        update: function (value) {
-            if (value === '') {
-                this.$emit('update:amount', undefined);
-            } else if (/^[0-9]+$/.test(value)) {
-                this.$emit('update:amount', parseInt(value, 10));
-            }
-        }
-    },
-    template: `
-      <div class="form-group">
-          <label for="amount">Amount</label>
-          <div class="input-group w-50">
-              <div class="input-group-prepend">
-                  <span class="input-group-text">
-                      <template v-if="direction === 'FROMBTC'">&#x0e3f;</template>
-                      <template v-else-if="currency === 'EUR'">€</template>
-                      <template v-else="">$</template>
-                  </span>
-              </div>
-              <input
-              id="amount" 
-              name="amount"
-              type="text" 
-              maxlength="10" 
-              v-validate="'numeric'" 
-              :value="amount" 
-              @input="update($event.target.value)" 
-              class="form-control" 
-              :class="{'is-invalid': errors.has('amount')}"/>
-              <div class="invalid-feedback" v-if="errors.has('amount')">Only numbers are allowed</div>
-          </div>
-          <small id="passwordHelpBlock" class="form-text text-muted">Type the desired amount in as an integer</small>
-      </div>
-`
-});
 
 Vue.use(VeeValidate /* vee-validate plugin. */);
 

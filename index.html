@@ -17,9 +17,9 @@
     <!-- Vue.js Debugging. -->
     <!--<script src="http://localhost:8098"></script>-->
 
-    <script src="node_modules/vue/dist/vue.js"></script>
-    <script src="node_modules/vee-validate/dist/vee-validate.js"></script>
-    <script src="node_modules/axios/dist/axios.js"></script>
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script src="node_modules/vee-validate/dist/vee-validate.min.js"></script>
+    <script src="node_modules/axios/dist/axios.min.js"></script>
 
 </head>
 
@@ -49,6 +49,7 @@
                 </btc-select-conversiondir>
 
                 <btc-input-amount
+                        class="mb-0"
                         :amount.sync="amount"
                         :currency="currency"
                         :direction="direction">
