@@ -60,7 +60,7 @@ Vue.component('btc-select-conversiondir', {
                 :checked="direction === d.key" 
                 @change="$emit('update:direction', $event.target.value)" />
             <label class="form-check-label" :for="'direction' + d.key">
-              {{d.label.replace('$currency',currency)}}
+              {{d.label.replace('$currency', currency)}}
             </label>
           </div>
         </div>
@@ -135,20 +135,19 @@ Vue.component('btc-conversion-result', {
     }),
     // Vue.js mounted hook.
     mounted() {
-        const vm = this;
         const updateExchangeRatePeriodically = () => {
             axios
                 .get('https://api.coindesk.com/v1/bpi/currentprice.json')
                 .then(response => {
-                    vm.loading = false;
-                    vm.loadError = '';
-                    vm.update = new Date(response.data.time.updatedISO);
-                    vm.rateEUR = response.data.bpi.EUR.rate_float;
-                    vm.rateUSD = response.data.bpi.USD.rate_float;
+                    this.loading = false;
+                    this.loadError = '';
+                    this.update = new Date(response.data.time.updatedISO);
+                    this.rateEUR = response.data.bpi.EUR.rate_float;
+                    this.rateUSD = response.data.bpi.USD.rate_float;
                 })
                 .catch(response => {
-                    vm.loading = false;
-                    vm.loadError = JSON.stringify(response);
+                    this.loading = false;
+                    this.loadError = JSON.stringify(response);
                 });
             // Refresh the data every minute.
             setTimeout(updateExchangeRatePeriodically, 60000 /* One minute. */);
