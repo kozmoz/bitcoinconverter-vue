@@ -53,10 +53,10 @@ $ open index.html
 
 All variants of this Bitcoin converter application:
 
-* Vue.js Bitcoin converter application [src](https://github.com/kozmoz/bitcoinconverter-vue) [demo](http://sandbox.juurlink.org/vuejs/)
-* Angular Bitcoin converter application [src](https://github.com/kozmoz/bitcoinconverter-angular2) [demo](http://sandbox.juurlink.org/angular/)
-* AngularJS Bitcoin converter application [src](https://github.com/kozmoz/bitcoinconverter-angular1) [demo](http://sandbox.juurlink.org/angularjs/)
-* Backbone Bitcoin converter application [src](https://github.com/kozmoz/bitcoinconverter-backbone) [demo](http://sandbox.juurlink.org/backbone/)
+* Vue.js Bitcoin converter application [blog](https://juur.link/2019/01/vue-js-angularjs-done-right/) [src](https://github.com/kozmoz/bitcoinconverter-vue) [demo](http://sandbox.juurlink.org/vuejs/)
+* Angular Bitcoin converter application [blog] [src](https://github.com/kozmoz/bitcoinconverter-angular2) [demo](http://sandbox.juurlink.org/angularjs2/)
+* AngularJS Bitcoin converter application [blog](https://juur.link/2013/05/angularjs/) [src](https://github.com/kozmoz/bitcoinconverter-angular1) [demo](http://sandbox.juurlink.org/angularjs/)
+* Backbone Bitcoin converter application [blog](https://juur.link/2013/10/backbone-js-introductie/) [src](https://github.com/kozmoz/bitcoinconverter-backbone) [demo](http://sandbox.juurlink.org/backbone/)
 
 ---
 
