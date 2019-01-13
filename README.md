@@ -46,17 +46,17 @@ $ open index.html
 
 ## Built With
 
+* [Vue.js](https://vuejs.org) 2.5 - The Progressive JavaScript Framework
+* [Bootstrap](https://getbootstrap.com) 4.2 – Responsive, mobile-first front-end component library
+* [vee-vaidate](https://baianat.github.io/vee-validate/) 4.1 - Template Based Validation Framework for Vue.js
 * [Coindesk API](https://www.coindesk.com/api) - CoinDesk Bitcoin Price Index API
-* [Vue.js](https://vuejs.org) - Vue.js 2.5.x, The Progressive JavaScript Framework
-* [Bootstrap](https://getbootstrap.com) - Bootstrap 4.2.1 – Responsive, mobile-first front-end component library
-* [vee-vaidate](https://baianat.github.io/vee-validate/) - Template Based Validation Framework for Vue.js
 
 All variants of this Bitcoin converter application:
 
-* [Vue.js Bitcoin converter application](https://github.com/kozmoz/bitcoinconverter-vue)
-* [Angular Bitcoin converter application](https://github.com/kozmoz/bitcoinconverter-angular2)
-* [AngularJS Bitcoin converter application](https://github.com/kozmoz/bitcoinconverter-angular1)
-* [Backbone Bitcoin converter application](https://github.com/kozmoz/bitcoinconverter-backbone)
+* Vue.js Bitcoin converter application [src](https://github.com/kozmoz/bitcoinconverter-vue) [demo](http://sandbox.juurlink.org/vuejs/)
+* Angular Bitcoin converter application [src](https://github.com/kozmoz/bitcoinconverter-angular2) [demo](http://sandbox.juurlink.org/angular/)
+* AngularJS Bitcoin converter application [src](https://github.com/kozmoz/bitcoinconverter-angular1) [demo](http://sandbox.juurlink.org/angularjs/)
+* Backbone Bitcoin converter application [src](https://github.com/kozmoz/bitcoinconverter-backbone) [demo](http://sandbox.juurlink.org/backbone/)
 
 ---
 
