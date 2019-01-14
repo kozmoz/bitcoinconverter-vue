@@ -25,62 +25,6 @@
 
 <body>
 
-<div class="container">
-
-    <div class="row">
-        <div class="col converter-block-title text-center text-white">
-            <h2>Bitcoin Converter</h2>
-        </div>
-    </div>
-
-    <div id="app" class="row py-3 bg-light" v-cloak="true">
-        <div class="col-sm-12 col-md-6">
-            <form novalidate="novalidate">
-
-                <btc-select-currency
-                        :currencies="CURRENCIES"
-                        :currency.sync="currency">
-                </btc-select-currency>
-
-                <btc-select-conversiondir
-                        :directions="DIRECTIONS"
-                        :currency="currency"
-                        :direction.sync="direction">
-                </btc-select-conversiondir>
-
-                <btc-input-amount
-                        class="mb-0"
-                        :amount.sync="amount"
-                        :currency="currency"
-                        :direction="direction">
-                </btc-input-amount>
-            </form>
-        </div>
-
-        <div class="col-sm-12 col-md-6 m-auto bg-light">
-            <div class="converter-block-result bg-white text-center px-3 py-3">
-
-                <btc-conversion-result
-                        :amount="amount"
-                        :currency="currency"
-                        :direction="direction">
-                </btc-conversion-result>
-
-                <p class="mb-0 text-danger" v-if="errors.items.length">
-                    Verify that everything is filled out correctly</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <p>Example Vue.js web application, following blog post:
-                <a href="https://juur.link/2019/01/vue-js-angularjs-done-right/" target="_blank">https://juur.link/2019/01/vue-js-angularjs-done-right/</a>
-            </p>
-        </div>
-    </div>
-
-</div>
 
 <script src="js/main.js"></script>
 
