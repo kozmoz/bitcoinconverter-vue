@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 /**
- * Moved to separate service so we can have a promise with return types (when using TypeScript)
+ * Moved to separate service so we can have a promise with return types (when using TypeScript).
  */
 export default {
 
