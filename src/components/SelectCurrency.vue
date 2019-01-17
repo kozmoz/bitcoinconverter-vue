@@ -7,8 +7,8 @@
                     class="form-control"
                     :value="currency"
                     @change="$emit('update:currency', $event.target.value)">
-                <option v-for="c in currencies" :value="c.key" :key="c.key">
-                    {{c.label}} {{c.sign}}
+                <option v-for="currency in currencies" :value="currency" :key="currency">
+                    {{$t(`message.${currency}_label`)}} {{$t(`message.${currency}_sign`)}}
                 </option>
             </select>
         </div>

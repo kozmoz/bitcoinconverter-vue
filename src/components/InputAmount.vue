@@ -4,11 +4,7 @@
         <div class="col-sm-9">
             <div class="input-group w-75">
                 <div class="input-group-prepend">
-        <span class="input-group-text">
-        <template v-if="direction === 'FROMBTC'">&#x0e3f;</template>
-        <template v-else-if="currency === 'EUR'">€</template>
-        <template v-else="">$</template>
-        </span>
+                    <span class="input-group-text">{{ $t(`message.${currency}_sign`) }}</span>
                 </div>
                 <input id="amount"
                        name="amount"
@@ -21,7 +17,7 @@
                        :class="{'is-invalid': errors.has('amount')}"/>
                 <div class="invalid-feedback" v-if="errors.has('amount')">Only numbers are allowed</div>
             </div>
-            <small id="passwordHelpBlock" class="form-text text-muted">The amount is an integer</small>
+            <small class="form-text text-muted">{{$t('message.inputamount-formtext-integer')}}</small>
         </div>
     </div>
 </template>
@@ -33,8 +29,7 @@
     export default {
         props: {
             amount: Number || undefined,
-            currency: String,
-            direction: String
+            currency: String
         },
         methods: {
             /**

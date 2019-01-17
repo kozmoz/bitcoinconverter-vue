@@ -1,86 +1,65 @@
 <template>
     <div>
-        <div v-if="loading">Loading exchange rates...</div>
-        <div v-else-if="!loadError">
-
+        <div v-if="tickerPrices.updated">
             <h3>
-                <template v-if="direction === 'TOBTC' && currency === 'EUR'">€</template>
-                <template v-if="direction === 'TOBTC' && currency === 'USD'">$</template>
-                {{amount || 0}}
-                <template v-if="direction === 'FROMBTC'">BTC</template>
-                =
-                <template v-if="direction === 'FROMBTC' && currency === 'EUR'">€</template>
-                <template v-if="direction === 'FROMBTC' && currency === 'USD'">$</template>
-                {{calculatedResult | numberRound(direction === 'TOBTC' ? 5 : 2)}}
-                <template v-if="direction === 'TOBTC'">BTC</template>
+                <template v-if="direction === DIRECTION_TOBTC">
+                    {{ $t(`message.${currency}_sign`)}} {{amount || 0}} = {{calculatedResult | numberRound(2)}} BTC
+                </template>
+                <template v-else>
+                    {{amount || 0}} BTC = {{calculatedResult | numberRound(5)}} {{ $t(`message.${currency}_sign`)}}
+                </template>
             </h3>
             <p class="mb-0">
                 <small class="text-muted">The exchange rate is updated every minute</small>
             </p>
             <p class="mb-0">
-                <small class="text-muted" v-if="update">
-                    Last update at {{update | dateHHMM}}, 1 BTC =
-                    <template v-if="currency === 'EUR'">€ {{rateEUR | numberRound(2)}}</template>
-                    <template v-if="currency === 'USD'">$ {{rateUSD | numberRound(2)}}</template>
-                    (buy)
+                <small class="text-muted" v-if="tickerPrices.updated">
+                    Last update at {{tickerPrices.updated | dateHHMM}}, 1 BTC =
+                    {{ $t(`message.${currency}_sign`)}} {{tickerPrices[`rate${currency}`] | numberRound(5)}} (buy)
                 </small>
             </p>
         </div>
-        <div v-else class="alert alert-danger" role="alert">{{loadError}}</div>
+        <div v-if="loadingStatus === LOADING_STATUS_LOADING">Loading/updating exchange rates...</div>
+        <div v-if="loadErrorMessage" class="alert alert-danger" role="alert">{{loadErrorMessage}}</div>
     </div>
 </template>
 
 <script>
+    import {mapGetters, mapState} from 'vuex';
+    import {
+        DIRECTION_FROMBTC,
+        DIRECTION_TOBTC,
+        LOADING_STATUS_ERROR,
+        LOADING_STATUS_LOADING,
+        LOADING_STATUS_NOT_LOADING
+    } from "../domain/constants";
+
     /**
      * Component to calculate the final exchange rate.
      */
-
-    import PriceService from '../services/PriceService';
-
     export default {
         props: {
-            amount: Number,
-            currency: String,
-            direction: String
+            // No props.
         },
         data: () => ({
-            loading: false,
-            loadError: '',
-            update: undefined,
-            rateEUR: undefined,
-            rateUSD: undefined
+            DIRECTION_TOBTC,
+            DIRECTION_FROMBTC,
+            LOADING_STATUS_LOADING,
+            LOADING_STATUS_NOT_LOADING,
+            LOADING_STATUS_ERROR
         }),
-        // Vue.js mounted hook.
-        mounted() {
-            const updateExchangeRatePeriodically = () => {
-                PriceService
-                    .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-                    .then(response => {
-                        this.loading = false;
-                        this.loadError = '';
-                        this.update = new Date(response.data.time.updatedISO);
-                        this.rateEUR = response.data.bpi.EUR.rate_float;
-                        this.rateUSD = response.data.bpi.USD.rate_float;
-                    })
-                    .catch(response => {
-                        this.loading = false;
-                        this.loadError = JSON.stringify(response);
-                    });
-                // Refresh the data every minute.
-                setTimeout(updateExchangeRatePeriodically, 60000 /* One minute. */);
-            };
-            this.loading = true;
-            updateExchangeRatePeriodically();
-        },
         computed: {
-            calculatedResult() {
-                if (this.direction === 'FROMBTC') {
-                    // Convert BTC to currency.
-                    return this.currency === 'EUR' ? this.amount * this.rateEUR : this.amount * this.rateEUR;
-                } else {
-                    return this.currency === 'EUR' ? this.amount / this.rateEUR : this.amount / this.rateUSD;
-                }
-            }
+            ...mapState([
+                'currency',
+                'direction',
+                'amount',
+                'tickerPrices',
+                'loadingStatus',
+                'loadErrorMessage'
+            ]),
+            ...mapGetters([
+                'calculatedResult'
+            ])
         },
         filters: {
             dateHHMM(value) {
@@ -91,7 +70,7 @@
                     ('00' + value.getMinutes()).substr(-2);
             },
             numberRound(value, decimals) {
-                if (!value || !value.toFixed) {
+                if (value !== 0 && !value || !value.toFixed) {
                     return '';
                 }
                 return value.toFixed(decimals || 2);
