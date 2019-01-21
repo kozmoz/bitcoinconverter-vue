@@ -1,6 +1,6 @@
 <template>
     <div class="form-group row">
-        <label for="amount" class="col-sm-3 col-form-label">Amount</label>
+        <label for="amount" class="col-sm-3 col-form-label">{{$t('message.amount')}}</label>
         <div class="col-sm-9">
             <div class="input-group w-75">
                 <div class="input-group-prepend">
@@ -15,7 +15,7 @@
                        @input="update($event.target.value)"
                        class="form-control"
                        :class="{'is-invalid': errors.has('amount')}"/>
-                <div class="invalid-feedback" v-if="errors.has('amount')">Only numbers are allowed</div>
+                <div class="invalid-feedback" v-if="errors.has('amount')">{{$t('message.amount_error')}}</div>
             </div>
             <small class="form-text text-muted">{{$t('message.inputamount-formtext-integer')}}</small>
         </div>

@@ -10,11 +10,11 @@
                 </template>
             </h3>
             <p class="mb-0">
-                <small class="text-muted">The exchange rate is updated every minute</small>
+                <small class="text-muted">{{$t('message.rate_updated')}}</small>
             </p>
             <p class="mb-0">
                 <small class="text-muted" v-if="tickerPrices.updated">
-                    Last update at {{tickerPrices.updated | dateHHMM}}, 1 BTC =
+                    {{ $t('message.rate_update_time') }} {{tickerPrices.updated | dateHHMM}}, 1 BTC =
                     {{ $t(`message.${currency}_sign`)}} {{tickerPrices[`rate${currency}`] | numberRound(5)}} (buy)
                 </small>
             </p>

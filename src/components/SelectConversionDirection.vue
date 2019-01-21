@@ -1,6 +1,6 @@
 <template>
     <div class="form-group row">
-        <legend class="col-form-label col-sm-3 pt-0">Direction</legend>
+        <legend class="col-form-label col-sm-3 pt-0">{{$t('message.direction')}}</legend>
         <div class="col-sm-9">
             <div class="form-check" v-for="d in directions" :key="d">
                 <input type="radio"

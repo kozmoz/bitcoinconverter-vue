@@ -1,6 +1,6 @@
 <template>
     <div class="form-group row">
-        <label for="currencyField" class="col-sm-3 col-form-label">Currency</label>
+        <label for="currencyField" class="col-sm-3 col-form-label">{{$t('message.currency')}}</label>
         <div class="col-sm-9">
             <select id="currencyField"
                     name="currencyField"

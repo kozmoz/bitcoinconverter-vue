@@ -1,8 +1,9 @@
 import {createLocalVue, mount} from '@vue/test-utils'
 import InputAmount from '../../src/components/InputAmount.vue'
 import VeeValidate from "vee-validate";
+import VueI18n from 'vue-i18n';
 
-describe('HelloWorld.vue', () => {
+describe('InputAmount.vue', () => {
 
     it('renders with the initial properties', () => {
 
@@ -11,9 +12,17 @@ describe('HelloWorld.vue', () => {
         const Vue = createLocalVue();
         Vue.use(VeeValidate /* , { inject: false } */);
 
+        Vue.use(VueI18n);
+
+        const i18n = new VueI18n({
+            locale: 'en',
+            messages: { /* Empty in test, ignore the warnings about messages not available. */}
+        });
+
         const wrapper = mount(InputAmount, {
                 localVue: Vue,
                 sync: false,
+                i18n,
                 propsData: {
                     amount: 100,
                     currency: 'USD',
@@ -25,7 +34,7 @@ describe('HelloWorld.vue', () => {
         const currencyText = wrapper.find('.input-group-prepend');
         const textInput = wrapper.find('input[type="text"]');
 
-        expect(currencyText.text().trim()).toBe('$');
+        expect(currencyText.text().trim()).toBe('message.USD_sign');
         expect(textInput.element.value).toBe('100');
     });
 
@@ -35,9 +44,17 @@ describe('HelloWorld.vue', () => {
         const Vue = createLocalVue();
         Vue.use(VeeValidate);
 
+        Vue.use(VueI18n);
+
+        const i18n = new VueI18n({
+            locale: 'en',
+            messages: { /* Empty in test, ignore the warnings about messages not available. */}
+        });
+
         const wrapper = mount(InputAmount, {
                 localVue: Vue,
                 sync: false,
+                i18n,
                 propsData: {
                     amount: 100,
                     currency: 'USD',

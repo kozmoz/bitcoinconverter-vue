@@ -5,17 +5,9 @@
 
                 <h2>{{title}}</h2>
 
-                <!-- Todo: create component. -->
-                <div class="position-absolute pr-2 language-selection">
-                    <div class="form-group my-0">
-                        <!--suppress HtmlFormInputWithoutLabel -->
-                        <select class="form-control form-control-sm" :value="locale" @input="updateLanguage">
-                            <option v-for="language of languages" :key="language" :value="language">
-                                {{ $t(`message.${language}`) }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                <select-language>
+                </select-language>
+
             </div>
         </div>
 
@@ -55,7 +47,7 @@
                     </conversion-result>
 
                     <p class="mb-0 text-danger" v-if="errors.items.length">
-                        Verify that everything is filled out correctly</p>
+                        {{$t('message.form_error')}}</p>
                 </div>
             </div>
         </div>
@@ -72,6 +64,7 @@
 </template>
 
 <script>
+    import SelectLanguage from "./components/SelectLanguage";
     import SelectCurrency from './components/SelectCurrency'
     import SelectConversionDirection from "./components/SelectConversionDirection";
     import InputAmount from "./components/InputAmount";
@@ -110,14 +103,8 @@
                     return this.currency;
                 }
             },
-            languages: function () {
-                return Object.keys(this.$i18n.messages);
-            },
             title: function () {
                 return process.env.VUE_APP_TITLE;
-            },
-            locale: function () {
-                return this.$i18n.locale;
             }
         },
         methods: {
@@ -132,6 +119,7 @@
             })
         },
         components: {
+            SelectLanguage,
             SelectConversionDirection,
             SelectCurrency,
             InputAmount,
@@ -159,13 +147,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    .language-selection {
-        right: 0;
-        /* Vertical align. */
-        top: 50%;
-        transform: translateY(-50%)
-    }
-
     .converter-block-title {
         background: linear-gradient(to bottom, #184791 0%, #00256f 100%);
     }
