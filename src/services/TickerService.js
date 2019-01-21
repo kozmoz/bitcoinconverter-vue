@@ -11,11 +11,7 @@ export default {
      * @return {Promise<Object>} The response with the date and prices
      */
     getTickerPrices() {
-
         return new Promise(function (resolve, reject) {
-
-            // Todo: add timeout.
-
             axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
                 .then(response => {
                     const result = {};
@@ -25,8 +21,12 @@ export default {
                     resolve(result);
                 })
                 .catch(response => {
-                    const loadError = JSON.stringify(response);
-                    reject(loadError)
+                    // Response with code or message (if reason is unknown).
+                    if (response.code === 'ECONNABORTED') {
+                        reject({code: response.code});
+                    } else {
+                        reject({message: response.message});
+                    }
                 });
         });
     }

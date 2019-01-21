@@ -3,10 +3,10 @@
         <div v-if="tickerPrices.updated">
             <h3>
                 <template v-if="direction === DIRECTION_TOBTC">
-                    {{ $t(`message.${currency}_sign`)}} {{amount || 0}} = {{calculatedResult | numberRound(2)}} BTC
+                    {{ $t(`message.${currency}_sign`)}} {{amount || 0}} = {{calculatedResult | numberRound(5)}} BTC
                 </template>
                 <template v-else>
-                    {{amount || 0}} BTC = {{calculatedResult | numberRound(5)}} {{ $t(`message.${currency}_sign`)}}
+                    {{amount || 0}} BTC = {{calculatedResult | numberRound(2)}} {{ $t(`message.${currency}_sign`)}}
                 </template>
             </h3>
             <p class="mb-0">
@@ -20,7 +20,7 @@
             </p>
         </div>
         <div v-if="loadingStatus === LOADING_STATUS_LOADING">Loading/updating exchange rates...</div>
-        <div v-if="loadErrorMessage" class="alert alert-danger" role="alert">{{loadErrorMessage}}</div>
+        <div v-if="loadErrorMessage" class="alert alert-danger mb-0" role="alert">{{loadErrorMessage}}</div>
     </div>
 </template>
 

@@ -16,6 +16,7 @@ const messages = {
             FROMBTC_label: 'Convert from Bitcoin to {currency}',
             nl: 'Nederlands',
             en: 'English',
+            error_ECONNABORTED: 'Timeout connecting to ticker service',
             'inputamount-formtext-integer': 'The amount is an integer'
         }
     },
@@ -30,6 +31,7 @@ const messages = {
             FROMBTC_label: 'Zet Bitcoin om naar {currency}',
             nl: 'Nederlands',
             en: 'English',
+            error_ECONNABORTED: 'Timeout bij verbinden met ticker service',
             'inputamount-formtext-integer': 'Het aantal is een geheel getal'
         }
     }

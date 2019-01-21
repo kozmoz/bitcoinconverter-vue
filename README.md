@@ -38,10 +38,11 @@ To get the required dependencies, issue the following npm command:
 $ npm install
 ```
 
-Now open index.html in a browser:
+Now start serving the app and open the following URL in the browser:
+[http://localhost:8080/](http://localhost:8080/)  
 
 ```
-$ open index.html
+$ npm run serve
 ```
 
 ## Built With

@@ -23,11 +23,6 @@
             <div class="col-sm-12 col-md-6">
                 <form novalidate="novalidate">
 
-                    <p>$store.state.currency: {{$store.state.currency}}</p>
-                    <p>$store.state.direction: {{$store.state.direction}}</p>
-                    <p>$store.state.amount: {{$store.state.amount}}</p>
-                    <p>$store.state.tickerPrices: {{$store.state.tickerPrices}}</p>
-
                     <!-- Reusable component, not dependent on data store. -->
                     <select-currency
                             :currencies="CURRENCIES"
@@ -53,7 +48,7 @@
             </div>
 
             <div class="col-sm-12 col-md-6 m-auto bg-light">
-                <div class="converter-block-result bg-white text-center px-3 py-3">
+                <div class="converter-block-result bg-white text-center px-3 py-3 my-3">
 
                     <!-- Component reads the data from the store. -->
                     <conversion-result>
