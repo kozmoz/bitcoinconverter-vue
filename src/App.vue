@@ -54,8 +54,9 @@
 
         <div class="row">
             <div class="col">
-                <p>Example Vue.js web application, following blog post:
-                    <a href="https://juur.link/2019/01/vue-js-angularjs-done-right/" target="_blank">https://juur.link/2019/01/vue-js-angularjs-done-right/</a>
+                <p>Example Vue.js web application, following this blog post:
+                    <a href="http://juur.link/2019/01/vue-js-angularjs-done-right-part-2/"
+                       target="_blank">https://juur.link/2019/01/vue-js-angularjs-done-right-part-2/</a>
                 </p>
             </div>
         </div>
