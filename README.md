@@ -58,7 +58,7 @@ $ npm run serve
 
 All variants of this Bitcoin converter application:
 
-* Vue.js - part 2 - Bitcoin converter application [blog](https://juur.link/2019/01/vue-js-angularjs-done-right-part2/) [src](https://github.com/kozmoz/bitcoinconverter-vue) [demo](http://sandbox.juurlink.org/vuejs-part2/)
+* Vue.js - part 2 - Bitcoin converter application [blog](https://juur.link/2019/01/vue-js-angularjs-done-right-part-2/) [src](https://github.com/kozmoz/bitcoinconverter-vue) [demo](http://sandbox.juurlink.org/vuejs-part-2/)
 * Vue.js - part 1 - Bitcoin converter application [blog](https://juur.link/2019/01/vue-js-angularjs-done-right/) [src](https://github.com/kozmoz/bitcoinconverter-vue/tree/without-single-file-components) [demo](http://sandbox.juurlink.org/vuejs/)
 * Angular Bitcoin converter application [blog] [src](https://github.com/kozmoz/bitcoinconverter-angular2) [demo](http://sandbox.juurlink.org/angularjs2/)
 * AngularJS Bitcoin converter application [blog](https://juur.link/2013/05/angularjs/) [src](https://github.com/kozmoz/bitcoinconverter-angular1) [demo](http://sandbox.juurlink.org/angularjs/)
