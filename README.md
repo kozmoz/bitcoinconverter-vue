@@ -51,6 +51,7 @@ $ npm run serve
 * [Vuex](https://vuex.vuejs.org) 3.0 - State management pattern + library for Vue.js applications
 * [vee-vaidate](https://baianat.github.io/vee-validate/) 4.1 - Template Based Validation Framework for Vue.js
 * [Vue I18n](https://kazupon.github.io/vue-i18n/) 8.7 - Vue I18n is internationalization plugin for Vue.js
+* [Vue CLI](https://cli.vuejs.org) 3 - Standard Tooling for Vue.js Development
 * [Bootstrap](https://getbootstrap.com) 4.2 – Responsive, mobile-first front-end component library
 * [Axios](https://github.com/axios/axios) 0.18 - Promise based HTTP client for the browser and node.js
 * [Coindesk API](https://www.coindesk.com/api) - CoinDesk Bitcoin Price Index API
