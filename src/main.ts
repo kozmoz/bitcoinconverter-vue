@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App'
-import VeeValidate from "vee-validate";
-import store from "./store";
-import i18n from "./i18n/messages";
+import VeeValidate from 'vee-validate';
+import store from './store';
+import i18n from './i18n/messages';
 import axios from 'axios';
 
 // https://vuejs.org/v2/api/#Global-Config

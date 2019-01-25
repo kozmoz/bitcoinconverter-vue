@@ -12,7 +12,7 @@
                        maxlength="10"
                        v-validate="'numeric'"
                        :value="amount"
-                       @input="update($event.target.value)"
+                       @input="updateValue($event.target.value)"
                        class="form-control"
                        :class="{'is-invalid': errors.has('amount')}"/>
                 <div class="invalid-feedback" v-if="errors.has('amount')">{{$t('message.amount_error')}}</div>
@@ -22,27 +22,25 @@
     </div>
 </template>
 
-<script>
-    /**
-     * Component to enter the amount for the exchange.
-     */
-    export default {
-        props: {
-            amount: Number || undefined,
-            currency: String
-        },
-        methods: {
-            /**
-             * Convert amount to number/undefined and emit an update event.
-             *
-             * @param value Input element value to update
-             */
-            update: function (value) {
-                if (value === '') {
-                    this.$emit('update:amount', undefined);
-                } else if (/^[0-9]+$/.test(value)) {
-                    this.$emit('update:amount', parseInt(value, 10));
-                }
+<script lang="ts">
+    import {Component, Prop, Vue} from 'vue-property-decorator';
+
+    @Component
+    export default class HelloWorld extends Vue {
+
+        @Prop() private amount!: number | undefined;
+        @Prop() private currency!: string;
+
+        /**
+         * Convert amount to number/undefined and emit an update event.
+         *
+         * @param value Input element value to update
+         */
+        updateValue(value: string): void {
+            if (!value) {
+                this.$emit('update:amount', undefined);
+            } else if (/^[0-9]+$/.test(value)) {
+                this.$emit('update:amount', parseInt(value, 10));
             }
         }
     }

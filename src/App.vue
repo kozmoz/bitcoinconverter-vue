@@ -64,12 +64,12 @@
     </div>
 </template>
 
-<script>
-    import SelectLanguage from "./components/SelectLanguage";
-    import SelectCurrency from './components/SelectCurrency'
-    import SelectConversionDirection from "./components/SelectConversionDirection";
-    import InputAmount from "./components/InputAmount";
-    import ConversionResult from "./components/ConversionResult";
+<script lang="js">
+    import SelectLanguage from './components/SelectLanguage';
+    import SelectCurrency from './components/SelectCurrency';
+    import SelectConversionDirection from './components/SelectConversionDirection';
+    import InputAmount from './components/InputAmount';
+    import ConversionResult from './components/ConversionResult';
     import {
         CURRENCIES,
         DIRECTION_FROMBTC,
@@ -77,7 +77,7 @@
         SET_AMOUNT,
         SET_CURRENCY,
         SET_DIRECTION
-    } from "./domain/constants";
+    } from './domain/constants';
     import {mapMutations, mapState} from 'vuex';
 
 

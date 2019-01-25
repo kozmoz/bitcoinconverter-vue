@@ -24,7 +24,7 @@
     </div>
 </template>
 
-<script>
+<script lang="js">
     import {mapGetters, mapState} from 'vuex';
     import {
         DIRECTION_FROMBTC,
@@ -32,7 +32,7 @@
         LOADING_STATUS_ERROR,
         LOADING_STATUS_LOADING,
         LOADING_STATUS_NOT_LOADING
-    } from "../domain/constants";
+    } from '../domain/constants';
 
     /**
      * Component to calculate the final exchange rate.
