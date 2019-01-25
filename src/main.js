@@ -15,12 +15,13 @@ Vue.use(VeeValidate);
 axios.defaults.timeout = 5000;
 
 // Bootstrap the Vue app.
-var app = new Vue({
+new Vue({
     el: '#app',
     i18n,
     store,
     render: createElement => createElement(App)
 });
+
 
 // The store needs to set localized (error) messages.
 store.dispatch('setMessageBundle', i18n);
