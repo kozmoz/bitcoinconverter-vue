@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+// Determine if we are in development mode.
+const development = process.env.NODE_ENV !== 'production';
+
+// The URL is proxied in vue.config.js.
+const url = development ? '/stubs/currentprice.json' : 'https://api.coindesk.com/v1/bpi/currentprice.json';
+
 /**
  * Moved to separate service so we can have a promise with return types (when using TypeScript).
  */
@@ -12,7 +18,7 @@ export default {
      */
     getTickerPrices() {
         return new Promise(function (resolve, reject) {
-            axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+            axios.get(url)
                 .then(response => {
                     const result = {};
                     result.updated = new Date(response.data.time.updatedISO);

@@ -4,10 +4,12 @@
   "description": "Bitcoin converter to demonstrate the use of Vue.js",
   "author": "Rob Juurlink <npm@juurlink.org> (https://juur.link)",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "concurrently --kill-others-on-fail 'npm run serve.vue' 'npm run start.stubserver'",
     "build": "vue-cli-service build",
     "test": "npm run test:unit",
     "lint": "vue-cli-service lint",
+    "start.stubserver": "node stubs/index",
+    "serve.vue": "vue-cli-service serve",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
@@ -29,7 +31,9 @@
     "babel-jest": "^23.6.0",
     "eslint": "^5.12.1",
     "eslint-plugin-vue": "^5.1.0",
-    "vue-template-compiler": "^2.5.22"
+    "vue-template-compiler": "^2.5.22",
+    "express": "^4.16.4",
+    "concurrently": "^4.1.0"
   },
   "eslintConfig": {
     "root": true,
