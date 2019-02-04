@@ -1,7 +1,7 @@
-import {createLocalVue, mount} from '@vue/test-utils'
 import InputAmount from '../../src/components/InputAmount.vue'
 import VeeValidate from "vee-validate";
 import VueI18n from 'vue-i18n';
+import {createLocalVue, mount} from '@vue/test-utils'
 
 describe('InputAmount.vue', () => {
 
