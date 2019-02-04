@@ -19,7 +19,7 @@
           {{ $t("message.rate_update_time") }}
           {{ tickerPrices.updated | dateHHMM }}, 1 BTC =
           {{ $t(`message.${currency}_sign`) }}
-          {{ tickerPrices[`rate${currency}`] | numberRound(5) }} (buy)
+          {{ tickerPrices[`rate${currency}`] | numberRound(2) }} (buy)
         </small>
       </p>
     </div>

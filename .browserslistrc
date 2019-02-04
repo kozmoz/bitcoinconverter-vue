@@ -1,3 +1,10 @@
+# Specifying a range of browsers the project is targeting. This value will be used by @babel/preset-env
+# to determine the Polyfills needed for your project.
+#
+# To show the list of browsers selected by the query:
+# $ npx browserslist
+#
+
 > 1%
-last 2 versions
-not ie <= 8
+ie 11
+edge 17
