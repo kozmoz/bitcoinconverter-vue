@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 /**
  * Moved to separate service so we can have a promise with return types (when using TypeScript).
@@ -12,7 +12,7 @@ export default {
   getTickerPrices() {
     return new Promise(function(resolve, reject) {
       axios
-        .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+        .get('https://api.coindesk.com/v1/bpi/currentprice.json')
         .then(response => {
           const result = {};
           result.updated = new Date(response.data.time.updatedISO);
@@ -22,7 +22,7 @@ export default {
         })
         .catch(response => {
           // Response with code or message (if reason is unknown).
-          if (response.code === "ECONNABORTED") {
+          if (response.code === 'ECONNABORTED') {
             reject({ code: response.code });
           } else {
             reject({ message: response.message });

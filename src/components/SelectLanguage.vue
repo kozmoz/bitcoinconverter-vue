@@ -2,11 +2,7 @@
   <div class="position-absolute pr-2 language-selection">
     <div class="form-group my-0">
       <!--suppress HtmlFormInputWithoutLabel -->
-      <select
-        class="form-control form-control-sm"
-        :value="locale"
-        @input="updateLanguage"
-      >
+      <select :value="locale" class="form-control form-control-sm" @input="updateLanguage">
         <option v-for="language of languages" :key="language" :value="language">
           {{ $t(`message.${language}`) }}
         </option>

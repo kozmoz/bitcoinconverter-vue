@@ -4,45 +4,29 @@
       <div class="col converter-block-title text-center text-white">
         <h2>{{ title }}</h2>
 
-        <select-language> </select-language>
+        <select-language></select-language>
       </div>
     </div>
 
-    <div id="app" class="row py-3 bg-light" v-cloak>
+    <div v-cloak id="app" class="row py-3 bg-light">
       <div class="col-sm-12 col-md-6">
         <form novalidate="novalidate">
           <!-- Reusable component, not dependent on data store. -->
-          <select-currency
-            :currencies="CURRENCIES"
-            :currency="currency"
-            @update:currency="updateCurrency"
-          >
-          </select-currency>
+          <select-currency :currencies="CURRENCIES" :currency="currency" @update:currency="updateCurrency"></select-currency>
 
-          <select-conversion-direction
-            :directions="DIRECTIONS"
-            :currency="currency"
-            :direction="direction"
-            @update:direction="updateDirection"
-          >
+          <select-conversion-direction :currency="currency" :direction="direction" :directions="DIRECTIONS" @update:direction="updateDirection">
           </select-conversion-direction>
 
-          <input-amount
-            class="mb-0"
-            :amount="amount"
-            :currency="currencyForInput"
-            @update:amount="updateAmount"
-          >
-          </input-amount>
+          <input-amount :amount="amount" :currency="currencyForInput" class="mb-0" @update:amount="updateAmount"></input-amount>
         </form>
       </div>
 
       <div class="col-sm-12 col-md-6 m-auto bg-light">
         <div class="converter-block-result bg-white text-center px-3 py-3 my-3">
           <!-- Component reads the data from the store. -->
-          <conversion-result> </conversion-result>
+          <conversion-result></conversion-result>
 
-          <p class="mb-0 text-danger" v-if="errors.items.length">
+          <p v-if="errors.items.length" class="mb-0 text-danger">
             {{ $t("message.form_error") }}
           </p>
         </div>
@@ -53,9 +37,7 @@
       <div class="col">
         <p>
           Example Vue.js web application, following this blog post:
-          <a
-            href="http://juur.link/2019/01/vue-js-angularjs-done-right-part-2/"
-            target="_blank"
+          <a href="http://juur.link/2019/01/vue-js-angularjs-done-right-part-2/" target="_blank"
             >https://juur.link/2019/01/vue-js-angularjs-done-right-part-2/</a
           >
         </p>
@@ -65,26 +47,19 @@
 </template>
 
 <script>
-import SelectLanguage from "./components/SelectLanguage";
-import SelectCurrency from "./components/SelectCurrency";
-import SelectConversionDirection from "./components/SelectConversionDirection";
-import InputAmount from "./components/InputAmount";
-import ConversionResult from "./components/ConversionResult";
-import {
-  CURRENCIES,
-  DIRECTION_FROMBTC,
-  DIRECTIONS,
-  SET_AMOUNT,
-  SET_CURRENCY,
-  SET_DIRECTION
-} from "./domain/constants";
-import { mapMutations, mapState } from "vuex";
+import SelectLanguage from './components/SelectLanguage';
+import SelectCurrency from './components/SelectCurrency';
+import SelectConversionDirection from './components/SelectConversionDirection';
+import InputAmount from './components/InputAmount';
+import ConversionResult from './components/ConversionResult';
+import { CURRENCIES, CURRENCY_BTC, DIRECTION_FROMBTC, DIRECTIONS, SET_AMOUNT, SET_CURRENCY, SET_DIRECTION } from './domain/constants';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
   computed: {
     // Actually we map those computed properties to the state in the global $store.
     // currency: function() { return this.$store.state.currency }
-    ...mapState(["currency", "direction", "amount"]),
+    ...mapState(['currency', 'direction', 'amount']),
 
     CURRENCIES: () => CURRENCIES,
     DIRECTIONS: () => DIRECTIONS,
@@ -94,7 +69,7 @@ export default {
      */
     currencyForInput: function() {
       if (this.direction === DIRECTION_FROMBTC) {
-        return "BTC";
+        return CURRENCY_BTC;
       } else {
         return this.currency;
       }
@@ -134,6 +109,10 @@ body {
 
 body > * {
   max-width: 1024px;
+}
+
+a {
+  color: #42b983;
 }
 
 [v-cloak] {

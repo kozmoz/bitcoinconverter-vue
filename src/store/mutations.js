@@ -1,11 +1,4 @@
-import {
-  SET_AMOUNT,
-  SET_CURRENCY,
-  SET_DIRECTION,
-  SET_LOAD_ERROR,
-  SET_LOADING_STATUS,
-  SET_TICKER_PRICES
-} from "../domain/constants";
+import { SET_AMOUNT, SET_CURRENCY, SET_DIRECTION, SET_LOAD_ERROR, SET_LOADING_STATUS, SET_TICKER_PRICES } from '../domain/constants';
 
 export default {
   [SET_LOADING_STATUS](state, status) {

@@ -4,17 +4,17 @@
       {{ $t("message.direction") }}
     </legend>
     <div class="col-sm-9">
-      <div class="form-check" v-for="d in directions" :key="d">
+      <div v-for="d in directions" :key="d" class="form-check">
         <input
-          type="radio"
           :id="`direction-${d}`"
-          name="direction"
-          class="form-check-input"
-          :value="d"
           :checked="d === direction"
+          :value="d"
+          class="form-check-input"
+          name="direction"
+          type="radio"
           @change="$emit('update:direction', $event.target.value)"
         />
-        <label class="form-check-label" :for="`direction-${d}`">
+        <label :for="`direction-${d}`" class="form-check-label">
           {{
             $t(`message.${d}_label`, {
               currency: $t(`message.${currency}_label`)

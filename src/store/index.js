@@ -1,18 +1,14 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import {
-  CURRENCY_EUR,
-  DIRECTION_FROMBTC,
-  LOADING_STATUS_NOT_LOADING
-} from "../domain/constants";
-import mutations from "./mutations";
-import actions from "./actions";
-import getters from "./getters";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import { CURRENCY_EUR, DIRECTION_FROMBTC, LOADING_STATUS_NOT_LOADING } from '../domain/constants';
+import mutations from './mutations';
+import actions from './actions';
+import getters from './getters';
 
 Vue.use(Vuex);
 
 // Conditional use the strict flag because it is expensive.
-const strict = process.env.NODE_ENV !== "production";
+const strict = process.env.NODE_ENV !== 'production';
 
 // Create the state management datastore.
 const store = new Vuex.Store({
@@ -28,7 +24,7 @@ const store = new Vuex.Store({
       rateEUR: null /* number */,
       rateUSD: null /* number */
     },
-    loadErrorMessage: ""
+    loadErrorMessage: ''
   },
   actions,
   mutations,
@@ -39,7 +35,8 @@ export default store;
 
 // Update the ticker prices every minute.
 function fetchTickerPrices() {
-  store.dispatch("fetchTickerPrices");
+  store.dispatch('fetchTickerPrices');
   setTimeout(fetchTickerPrices, 60000 /* One minute. */);
 }
+
 fetchTickerPrices();

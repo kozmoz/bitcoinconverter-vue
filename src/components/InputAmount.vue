@@ -1,33 +1,29 @@
 <template>
   <div class="form-group row">
-    <label for="amount" class="col-sm-3 col-form-label">{{
-      $t("message.amount")
-    }}</label>
+    <label class="col-sm-3 col-form-label" for="amount">{{ $t("message.amount") }}</label>
     <div class="col-sm-9">
       <div class="input-group w-75">
         <div class="input-group-prepend">
-          <span class="input-group-text">{{
-            $t(`message.${currency}_sign`)
-          }}</span>
+          <span class="input-group-text">{{ $t(`message.${currency}_sign`) }}</span>
         </div>
+        <!--suppress JSUnresolvedVariable -->
         <input
           id="amount"
+          v-validate="'numeric'"
+          :class="{ 'is-invalid': errors.has('amount') }"
+          :value="amount"
+          class="form-control"
+          maxlength="10"
           name="amount"
           type="text"
-          maxlength="10"
-          v-validate="'numeric'"
-          :value="amount"
           @input="update($event.target.value)"
-          class="form-control"
-          :class="{ 'is-invalid': errors.has('amount') }"
         />
-        <div class="invalid-feedback" v-if="errors.has('amount')">
+        <!--suppress JSUnresolvedVariable -->
+        <div v-if="errors.has('amount')" class="invalid-feedback">
           {{ $t("message.amount_error") }}
         </div>
       </div>
-      <small class="form-text text-muted">{{
-        $t("message.inputamount-formtext-integer")
-      }}</small>
+      <small class="form-text text-muted">{{ $t("message.inputamount-formtext-integer") }}</small>
     </div>
   </div>
 </template>
@@ -48,10 +44,10 @@ export default {
      * @param value Input element value to update
      */
     update: function(value) {
-      if (value === "") {
-        this.$emit("update:amount", undefined);
+      if (value === '') {
+        this.$emit('update:amount', undefined);
       } else if (/^[0-9]+$/.test(value)) {
-        this.$emit("update:amount", parseInt(value, 10));
+        this.$emit('update:amount', parseInt(value, 10));
       }
     }
   }
